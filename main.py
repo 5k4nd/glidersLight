@@ -43,27 +43,13 @@ def run_server():
 
 
 
-
-tasks = [
-    {
-        'id': 1,
-        'title': u'Buy groceries',
-        'description': u'Milk, Cheese, Pizza, Fruit, Tylenol', 
-        'done': False
-    },
-    {
-        'id': 2,
-        'title': u'Learn Python',
-        'description': u'Need to find a good Python tutorial on the web', 
-        'done': False
-    }
-]
-
-@app.route('/tasks', methods=['GET'])
+@app.route('/', methods=['GET'])
 def get_geojson_data():
     redis_data = r.get("glidersLight")
     if not(redis_data is None):
-        return jsonify(json.loads(redis_data))
+        decoded_data = json.loads(redis_data)
+        # return(str(json.loads(redis_data)))
+        return """{"geometry": {"type": "Point", "coordinates": %s}, "type": "Feature", "properties": {}}""" % decoded_data['DD9981']
     else:
         return "{}" 
 
@@ -79,14 +65,6 @@ def geojson_processing(beacon):
     }""" % (beacon['latitude'], beacon['longitude'])
 
     print("geojson_data UPDATED\n")
-
-
-# @app.route('/')
-# def hello_world():
-#     # return """{"geometry": {"type": "Point", "coordinates": [149.15878697788955, -48.881527700957491]}, "type": "Feature", "properties": {}}"""
-#     return str(variables.geojson_data)
-
-
 
 
 

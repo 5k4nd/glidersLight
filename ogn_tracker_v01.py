@@ -92,14 +92,14 @@ def gliderlight_process(beacon):
         extrait les données interéssantes du beacon (nom, latitude, longitude)
         et stocke le tout dans un json applati (flat) sur redis/localhost
     """
-    print("process beacon")
+    print("process beacon (%s)" % beacon['address'])
     raw_data = r.get("glidersLight")
     if not(raw_data is None):  # empty redis
         data = json.loads(raw_data)
     else:
         data = {}
-        data[beacon['address']] = (beacon['latitude'], beacon['longitude'])
-        r.set("glidersLight", json.dumps(data))
+    data[beacon['address']] = (beacon['latitude'], beacon['longitude'])
+    r.set("glidersLight", json.dumps(data))
 
 def process_beacon(raw_message):
     if raw_message[0] == '#':
@@ -112,7 +112,7 @@ def process_beacon(raw_message):
 
         if beacon['beacon_type'] == 'aircraft_beacon':
             # if beacon['receiver_name'] == 'CSS4':
-            if beacon['receiver_name'] == 'LFNF':
+            if beacon['receiver_name'] == 'LFNC':
             # if beacon['address'] == variables.current_tracked:
                 gliderlight_process(beacon)
                 # niceprint_beacon(beacon)
