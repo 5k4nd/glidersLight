@@ -1,1 +1,0 @@
-/home/bat/datum/code/python/scripts/lifehack/ogn_tracker.py

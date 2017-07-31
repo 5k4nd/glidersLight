@@ -32,7 +32,7 @@ app.config['SERVER_NAME'] = 'localhost:5559'
 app_name = 'Saint-Crépin in the Sky'
 
 from multiprocessing import Process
-from ogn_tracker import start_client, process_beacon
+from ogn_tracker_v01 import start_client, process_beacon
 
 import json
 from redis import Redis
