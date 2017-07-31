@@ -123,14 +123,14 @@ def process_beacon(raw_message):
 
 def start_client():
     print("RUNNING: ogn client")
+    global r
+    r = Redis('localhost')
     client = AprsClient(aprs_user='N0CALL')
     client.connect()
     return client
 
 
 if __name__ == '__main__':
-    r = Redis('localhost')
-
     client = start_client()
     try:
         client.run(callback=process_beacon, autoreconnect=True)
