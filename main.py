@@ -3,8 +3,7 @@
 
 """
 Todo:
-- stocker les variables dans ogn_tracker via redis, ATTENTION après avoir récupéré les anciennes
-- les utiliser dans glidersLight 
+- faire marcher le tout en local
 
 
 import redis
@@ -42,8 +41,8 @@ def run_server():
         
 
 
-
 @app.route('/', methods=['GET'])
+
 def get_geojson_data():
     redis_data = r.get("glidersLight")
     if not(redis_data is None):
